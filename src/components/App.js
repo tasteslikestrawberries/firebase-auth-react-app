@@ -1,9 +1,8 @@
 import React from 'react';
-import { ThemeProvider } from '../contexts/ThemeContext'
+import { useTheme, useThemeUpdate} from '../contexts/ThemeContext'
 
 //components
-import Signup from './Signup';
-import TestComponent from './TestComponent';
+import Signup from './Signup'
 
 //styles
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,18 +11,27 @@ import { AuthProvider } from '../contexts/AuthContext';
 
 
 function App() {
+  const darkTheme = useTheme()
+    const toggleTheme = useThemeUpdate()
+    const themeStyles = {
+        backgroundColor: darkTheme ? '#333' : '#fff',
+        color: darkTheme ? '#fff' : '#333',
+    }
   return (
   <>
-    <ThemeProvider>
-      <TestComponent />
-    </ThemeProvider>
+    
     
     <AuthProvider>
-      <Container className='d-flex align-items-center justify-content-center' style={{minHeight:'100vh'}}>
-        <div className='w-100' style={{maxWidth:'400px'}}>
-          <Signup />
-        </div>
-      </Container> 
+      <div style={themeStyles}>
+        <button onClick={toggleTheme}>Toggle Theme</button> 
+        
+        <Container className='d-flex align-items-center justify-content-center' style={{minHeight:'100vh'}}>
+          <div className='w-100' style={{maxWidth:'400px'}}>
+            <Signup />
+          </div>
+        </Container> 
+        {/*tu idu druge komponente*/}
+      </div>
     </AuthProvider>
   </>
   );
