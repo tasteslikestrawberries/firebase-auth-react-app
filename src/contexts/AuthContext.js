@@ -16,9 +16,15 @@ export function AuthProvider({children}) {
     const [currentUser, setCurrentUser] = useState();
     const [loading, setLoading] = useState(true);
 
+    //if you don't want to use Firebase just change this to connect to your server-the rest stays the same
     function signup(email, pasword){
         return auth.createUserWithEmailAndPassword(email,pasword)
     }
+    //if you don't want to use Firebase just change this to connect to your server-the rest stays the same
+    function login(email, pasword){
+        return auth.signInWithEmailAndPassword(email,pasword)
+    }
+
 
     useEffect( () => {
         const unsubscribe = auth.onAuthStateChanged(user => {
@@ -32,7 +38,8 @@ export function AuthProvider({children}) {
 
     const value={
         currentUser,
-        signup
+        signup,
+        login
     }
 
     return (

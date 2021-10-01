@@ -1,10 +1,11 @@
 import React, {useRef, useState} from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
-//services
+//comppnents
 import { useAuth } from '../contexts/AuthContext';
 
 //styles
-import {Form, Button, Alert} from 'react-bootstrap';
+import {Container, Form, Button, Alert} from 'react-bootstrap';
 
 export default function Signup() {
     const emailRef = useRef();
@@ -13,6 +14,7 @@ export default function Signup() {
     const {signup} = useAuth();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const history = useHistory();
 
     async function handleSubmit (e) {
         e.preventDefault();
@@ -25,6 +27,7 @@ export default function Signup() {
             setError('')
             setLoading(true)
             await signup(emailRef.current.value, passwordRef.current.value)
+            history.push('/')
         } catch {
             setError('Failed to create an account')
         }
@@ -33,8 +36,9 @@ export default function Signup() {
     }
 
     return (
-        <>
-            
+        <>  
+            <Container className='d-flex align-items-center justify-content-center' style={{minHeight:'100vh'}}>
+                <div className='w-100' style={{maxWidth:'400px'}}>
                     <h2 className='text-center mb-4'>Sign Up</h2>
                
                     {error && <Alert variant='danger'>{error}</Alert> }
@@ -54,9 +58,11 @@ export default function Signup() {
                         <Button disabled={loading} style={{marginTop:'1rem'}} className='w-100' type='submit'>Sign Up</Button>
                     </Form>
             
-            <div className='w-100 text-center mt-2'>
-                Already have an account? Log in
-            </div>
+                    <div className='w-100 text-center mt-2'>
+                    Already have an account? <Link to='/login'>Log in</Link>
+                    </div>
+                </div>
+            </Container>
         </>
     )
 }
