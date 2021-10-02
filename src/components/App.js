@@ -1,10 +1,13 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+  import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useTheme, useThemeUpdate} from '../contexts/ThemeContext'
 
 //components
+import PrivateRoute from './PrivateRoute';
 import Signup from './Signup'
 import Login from './Login'
+import ForgotPassword from './ForgotPassword';
+import UpdateProfile from './UpdateProfile';
 import Dashboard from './Dashboard'
 
 //styles
@@ -29,18 +32,11 @@ function App() {
 
           <Switch>
 
-            <Route exact path='/'>
-              <Dashboard />
-            </Route>
-
-            <Route path='/signup'>
-                  <Signup />
-            </Route>
-
-            <Route path='/login'>
-                  <Login />
-            </Route>
-
+            <PrivateRoute exact path='/' component={Dashboard} />
+            <PrivateRoute path='/update-profile' component={UpdateProfile} />
+            <Route path='/signup' component={Signup} />
+            <Route path='/login' component={Login} />
+            <Route path='/forgot-password' component={ForgotPassword} />
           </Switch>
 
         </div>
