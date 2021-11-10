@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory } from "react-router-dom";
 
 //comppnents
 import { useAuth } from "../contexts/AuthContext";
@@ -22,7 +22,7 @@ export default function Login() {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      history.push('/')
+      history.push("/");
     } catch {
       setError("Failed to sign in");
     }
@@ -60,11 +60,11 @@ export default function Login() {
             </Button>
           </Form>
           <div className="w-100 text-center mt-2">
-            <Link to='/forgot-password'>Forgot Password?</Link>
+            <Link to="/forgot-password">Forgot Password?</Link>
           </div>
 
           <div className="w-100 text-center mt-2">
-            Need an account? <Link to='/signup'>Sign Up</Link>
+            Need an account? <Link to="/signup">Sign Up</Link>
           </div>
         </div>
       </Container>

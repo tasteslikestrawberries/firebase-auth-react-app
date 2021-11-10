@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 //comppnents
 import { useAuth } from "../contexts/AuthContext";
@@ -18,11 +18,11 @@ export default function ForgotPassword() {
     e.preventDefault();
 
     try {
-      setMessage('')
-      setError('')
+      setMessage("");
+      setError("");
       setLoading(true);
-      await resetPassword(emailRef.current.value)
-      setMessage('Check your inbox for further instructions.')
+      await resetPassword(emailRef.current.value);
+      setMessage("Check your inbox for further instructions.");
     } catch {
       setError("Failed to reset password");
     }
@@ -46,7 +46,7 @@ export default function ForgotPassword() {
               <Form.Label>Email</Form.Label>
               <Form.Control type="email" ref={emailRef} required />
             </Form.Group>
-      
+
             <Button
               disabled={loading}
               style={{ marginTop: "1rem" }}
@@ -58,11 +58,11 @@ export default function ForgotPassword() {
           </Form>
 
           <div className="w-100 text-center mt-3">
-            <Link to='/login'>Login</Link>
+            <Link to="/login">Login</Link>
           </div>
 
           <div className="w-100 text-center mt-2">
-            Need an account? <Link to='/signup'>Sign Up</Link>
+            Need an account? <Link to="/signup">Sign Up</Link>
           </div>
         </div>
       </Container>
